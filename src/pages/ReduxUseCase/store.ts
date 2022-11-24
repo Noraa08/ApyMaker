@@ -1,9 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterSlice from './Counter/features/counter/counterSlice'
+import postsSlice from './Posts/features/posts/postSlice'
 
 export const store = configureStore({
     reducer:{
         yumeCounter: counterSlice,
+        yumePosts: postsSlice,
     }
 })
 

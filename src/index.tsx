@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import HooksUseCase from "./pages/HooksUseCase";
 import ReduxUseCase from "./pages/ReduxUseCase";
 import Counter from "./pages/ReduxUseCase/Counter";
+import Posts from "./pages/ReduxUseCase/Posts";
 
 
 const root = ReactDOM.createRoot(
@@ -26,7 +27,7 @@ root.render(
 
           <Route path="/redux-use-case" >
             <Route index element={<ReduxUseCase />} />
-            <Route path="/redux-use-case/counter" element={<Counter />} />
+            <Route path="/redux-use-case/posts" element={<Posts />} />
           </Route>
 
         </Routes>

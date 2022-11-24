@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 
-interface ConterState {
+export interface ConterState {
     number: number
 }
 

@@ -48,6 +48,8 @@ export default Counter
 
 
 const Container = tw.div`
-  w-screen h-screen
+  w-full 
+  h-full
   flex flex-col justify-center items-center
+  mt-10
 `;
