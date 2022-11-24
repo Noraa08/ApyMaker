@@ -1,8 +1,9 @@
 import React from 'react'
+import Counter from './Counter'
 
 const ReduxUseCase = () => {
   return (
-    <div>ReduxUseCase</div>
+    <Counter />
   )
 }
 
