@@ -1,20 +1,25 @@
 import React from 'react'
 import tw from "twin.macro";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate()
+  
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <StyledButton>In Style</StyledButton>
+
+      <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+        <StyledButton onClick={()=> navigate('/hooks-use-case')}>Hook Use Cases </StyledButton>
         <br />
-        <TailwindButton>In Tailwind Style</TailwindButton>
+        <TailwindButton onClick={()=> navigate('/redux-use-case')}>Redux Use Cases </TailwindButton>
         <br />
-        <ConditionalButton isRed={false} >Conditional Tailwind</ConditionalButton>
-      </main>
+        <ConditionalButton onClick={()=> navigate('/login-example')} isRed={false} >Login Examples</ConditionalButton>
+      </div>
+
     </div>
-  );
+  )
 }
 
 // still works despite importing from twin.macro
