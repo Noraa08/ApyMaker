@@ -57,6 +57,19 @@ article {
 h1 {
   font-size: 3.5rem;
 }
+h2 {
+  font-size: 2.5rem;
+}
+h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+h4, span {
+  font-size: 1rem;
+  font-weight: ital;
+  font-style: italic;
+}
+
 
 p {
   font-family: Arial, Helvetica, sans-serif;
