@@ -32,6 +32,11 @@ select {
   font: inherit;
   margin-bottom: 1em;
 }
+input,
+textarea,
+select {
+  color: black;
+}
 
 main {
   max-width: 500px;

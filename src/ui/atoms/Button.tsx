@@ -3,13 +3,12 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export interface ButtonType {
-  theme?: "filled" | "outlined" | "text" | "base" | "filter";
+  theme: "filled" | "outlined" | "text" | "base" | "filter" | "disabled";
   className?: string;
   text?: string;
   value?: string;
   children?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
-  // onClick?: any;
 }
 
 const BaseButton = styled.button`
@@ -55,7 +54,6 @@ const FilledButton = styled(BaseButton)`
     hover:bg-transparent
     hover:text-secondary
     hover:border-secondary
-    mr-2
     sm:mr-8
     mb-4
   `};
@@ -72,6 +70,13 @@ const FilterButton = styled(BaseButton)`
   ${tw` 
     text-gray-700
     border-gray-300 
+  `}
+`;
+const DisabledButton = styled(BaseButton)`
+  ${tw` 
+    text-gray-700
+    border-gray-700
+    pointer-events-none
   `}
 `;
 
@@ -98,18 +103,30 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
         </TextButton>
       );
 
-    case "filter":
-      return (
-        <FilterButton
-          className={className}
-          onClick={onClick}
-          value={text}
-        >
-          {text}
-          {children}
-        </FilterButton>
-      );
-
+      case "filter":
+        return (
+          <FilterButton
+            className={className}
+            onClick={onClick}
+            value={text}
+          >
+            {text}
+            {children}
+          </FilterButton>
+        );
+      case "disabled":
+        return (
+          <DisabledButton                    
+            type="button"
+            className={className}
+            onClick={onClick}
+            value={text}
+          >
+            {text}
+            {children}
+          </DisabledButton>
+        );
+      
     default:
       return (
         <BaseButton className={className} onClick={onClick}>

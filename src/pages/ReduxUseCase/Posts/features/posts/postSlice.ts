@@ -1,11 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, nanoid } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
 
 export interface PostState {
-    id: string;
-    title: string
-    content: string
+  id: string;
+  title: string;
+  content: string;
+  userId: string;
 }
 
 const initialState = [
@@ -25,12 +26,24 @@ const postsSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    postAdded(state, action: PayloadAction<PostState>){
-        state.push(action.payload)
+    postAdded: {
+        reducer(state, action: PayloadAction<PostState>) {
+          state.push(action.payload);
+        },
+        prepare(title, content, userId){
+            return {
+                payload:{
+                    id: nanoid(),
+                    title,
+                    content,
+                    userId
+                } as PostState
+            }
+        }
     }
   },
 });
 
 export const selectAllPosts = (state: RootState) => state.yumePosts;
-
+export const { postAdded } = postsSlice.actions;
 export default postsSlice.reducer;

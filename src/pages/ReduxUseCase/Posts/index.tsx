@@ -6,6 +6,7 @@ import { PostState, selectAllPosts } from './features/posts/postSlice';
 
 import Layout from '../components/Layout'
 import { Marginer } from '../../../ui/atoms/Marginer';
+import AddPostForm from './features/posts/AddPostForm';
 
 
 
@@ -27,6 +28,8 @@ const Posts = () => {
                 <PostsContainer>
                     {renderedPosts}
                 </PostsContainer>
+
+                <AddPostForm />
             </Container>
         </Layout>
     )

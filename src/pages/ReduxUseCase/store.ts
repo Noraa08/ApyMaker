@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterSlice from './Counter/features/counter/counterSlice'
 import postsSlice from './Posts/features/posts/postSlice'
+import usersSlice from './Posts/features/users/usersSlice'
 
 export const store = configureStore({
     reducer:{
         yumeCounter: counterSlice,
         yumePosts: postsSlice,
+        yumeUsers: usersSlice,
     }
 })
 
