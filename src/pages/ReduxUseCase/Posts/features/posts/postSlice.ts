@@ -15,6 +15,7 @@ export interface PostState {
     heart:number
     rocket:number
     coffee:number
+    [x:string]: number // must declare a index signature
   };
 }
 
@@ -70,24 +71,21 @@ const postsSlice = createSlice({
                         rocket: 0,
                         coffee: 0
                     },
-                    test: [
-                        { label1: 0},
-                        { label2: 0},
-                        { label3: 0},
-                      ]
                 } as PostState
             }
         }
     },
-    reactionAdded(state, action: PayloadAction<{postId: string, reaction:string}>) {
-        const {postId, reaction } = action.payload
+    reactionAdded(state, action: PayloadAction<{postId: string,reaction: string}>) {
+        let {postId, reaction } = action.payload
         const existingPost = state.find(p => p.id === postId)
         if(existingPost){
+            existingPost.reactions[reaction]++   // // must declare a index signature
+            
         }
     }
   },
 });
 
 export const selectAllPosts = (state: RootState) => state.yumePosts;
-export const { postAdded } = postsSlice.actions;
+export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;

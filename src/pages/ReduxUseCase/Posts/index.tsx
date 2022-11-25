@@ -9,6 +9,7 @@ import { Marginer } from '../../../ui/atoms/Marginer';
 import AddPostForm from './features/posts/AddPostForm';
 import PostAuthor from './features/posts/PostAuthor';
 import TimeAgo from './features/posts/TimeAgo';
+import ReactionButton from './features/posts/ReactionButton';
 
 
 
@@ -16,17 +17,21 @@ const Posts = () => {
     const posts = useSelector(selectAllPosts) as PostState[]
 
     // use slice() make a copy of original posts
-    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date) )
+    const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
     const renderedPosts = orderedPosts.map((post) =>
-        <article key={post.id} className="w-96 h-48">
+        <article key={post.id} className="w-96 h-72 relative">
             <h3>{post.title}</h3>
             <p>{post.content.substring(0, 100)}</p>
 
-            <div className="w-full flex justify-between">
-                <PostAuthor userId={post.userId} />
-                <TimeAgo timestamp={post.date} />
+            <div className="absolute bottom-0">
+                <div className="w-full flex justify-between ">
+                    <PostAuthor userId={post.userId} />
+                    <TimeAgo timestamp={post.date} />
+                </div>
+                <ReactionButton post={post} />
             </div>
+
         </article>
     )
 
