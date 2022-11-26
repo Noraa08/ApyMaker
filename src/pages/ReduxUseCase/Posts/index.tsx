@@ -2,7 +2,7 @@ import React from 'react'
 import tw from 'twin.macro';
 
 import { useSelector, useDispatch } from "react-redux";
-import { PostState, selectAllPosts } from './features/posts/postSlice';
+import { IPost, PostState, selectAllPosts } from './features/posts/postSlice';
 
 import Layout from '../components/Layout'
 import { Marginer } from '../../../ui/atoms/Marginer';
@@ -14,7 +14,7 @@ import ReactionButton from './features/posts/ReactionButton';
 
 
 const Posts = () => {
-    const posts = useSelector(selectAllPosts) as PostState[]
+    const posts = useSelector(selectAllPosts) as IPost[]
 
     // use slice() make a copy of original posts
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
