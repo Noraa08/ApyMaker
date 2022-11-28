@@ -9,9 +9,11 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import HooksUseCase from "./pages/HooksUseCase";
 import ReduxUseCase from "./pages/ReduxUseCase";
-import Counter from "./pages/ReduxUseCase/Counter";
 import Posts from "./pages/ReduxUseCase/Posts";
+import { fetchUsers } from "./pages/ReduxUseCase/Posts/features/users/usersSlice";
 
+// get users immediately as it loaded
+store.dispatch(fetchUsers())
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

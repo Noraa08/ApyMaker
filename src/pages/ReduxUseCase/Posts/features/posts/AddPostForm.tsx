@@ -1,11 +1,9 @@
 import { ChangeEvent, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import tw from "twin.macro";
-import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
 
-import { postAdded } from "./postSlice";
-import { selectAllUsers, UserState } from "../users/usersSlice";
 import Button from "../../../../../ui/atoms/Button";
+import { selectAllUsers, UserState } from "../users/usersSlice";
+import { addNewPost } from "./postSlice";
 
 const AddPostForm = () => {
     const dispatch = useDispatch();
@@ -14,25 +12,34 @@ const AddPostForm = () => {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const [userId, setUserId] = useState('')
+    const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const onTitleChanged = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)
     const onContentChanged = (e: ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value)
     const onAuthorChanged = (e: ChangeEvent<HTMLSelectElement>) => setUserId(e.target.value)
 
-    
-    const onSavePostClicked = (e:ChangeEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-
-        if (title && content) {
-            dispatch(postAdded(title, content, userId))
-        }
-        setTitle('')
-        setContent('')
-        setUserId('')
-    }
-
     // after all form filled, be able to save then
-    const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+    const canSave = [title, content, userId].every(Boolean) && addRequestStatus === 'idle';
+    // const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
+
+    const onSavePostClicked = () => {
+        if (canSave) {
+            try {
+                setAddRequestStatus('pending')
+                // 直接调用unwrap()方法，会过滤掉除结果信息外的多余信息
+                dispatch(addNewPost({ title, body:content, userId })).unwrap()
+
+                setTitle('')
+                setContent('')
+                setUserId('')
+            } catch (err) {
+                console.error('Failed to save the post', err)
+            } finally {
+                setAddRequestStatus('idle')
+            }
+        }
+
+    }
    
 
     const usersOptions = users.map(user => (
