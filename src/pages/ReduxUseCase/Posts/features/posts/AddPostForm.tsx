@@ -1,17 +1,20 @@
 import { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../../../../../ui/atoms/Button";
 import { selectAllUsers, UserState } from "../users/usersSlice";
 import { addNewPost } from "./postSlice";
 
 const AddPostForm = () => {
+    const navigate = useNavigate()
+    
     const dispatch = useDispatch();
     const users = useSelector(selectAllUsers) as UserState[]
 
-    const [title, setTitle] = useState('')
-    const [content, setContent] = useState('')
-    const [userId, setUserId] = useState('')
+    const [title, setTitle] = useState<string>('')
+    const [content, setContent] = useState<string>('')
+    const [userId, setUserId] = useState<string>('')
     const [addRequestStatus, setAddRequestStatus] = useState('idle')
 
     const onTitleChanged = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)
@@ -23,15 +26,17 @@ const AddPostForm = () => {
     // const canSave = Boolean(title) && Boolean(content) && Boolean(userId)
 
     const onSavePostClicked = () => {
+        const addedPost:any = { title, body:content, userId: Number(userId)}
         if (canSave) {
             try {
                 setAddRequestStatus('pending')
                 // 直接调用unwrap()方法，会过滤掉除结果信息外的多余信息
-                dispatch(addNewPost({ title, body:content, userId })).unwrap()
+                dispatch(addNewPost(addedPost)).unwrap()
 
                 setTitle('')
                 setContent('')
                 setUserId('')
+                navigate(`/redux-use-case/blog-posts`)
             } catch (err) {
                 console.error('Failed to save the post', err)
             } finally {

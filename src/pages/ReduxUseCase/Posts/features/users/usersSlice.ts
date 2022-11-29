@@ -29,5 +29,7 @@ const usersSlice = createSlice({
 })
 
 export const selectAllUsers = (state: RootState) => state.yumeUsers;
+export const selectUserById = (state: RootState, userId: number) => state.yumeUsers.find((user: { id: number; }) => user.id === userId)
+export const selectPostsByUser = (state: RootState, userId: number) => state.yumePosts.posts?.filter((post: { id: number; userId:number})=> post.userId === userId)
 
 export default usersSlice.reducer

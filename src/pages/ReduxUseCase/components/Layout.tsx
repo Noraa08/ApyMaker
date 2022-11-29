@@ -8,8 +8,8 @@ const Layout = () => {
   return (
     <div className="flex flex-col w-full h-screen justify-center relative">
       <div className="w-full h-auto flex justify-center pt-3 absolute top-0">
-        <Button theme={'outlined'} text="Counter" onClick={() => navigate('/redux-use-case/counter')} />
-        <Button theme={'outlined'} text="Blog Posts" onClick={() => navigate('/redux-use-case/posts')} />
+        <Button theme={'outlined'} text="Counter" onClick={() => navigate('/redux-use-case')} />
+        <Button theme={'outlined'} text="Blog Posts" onClick={() => navigate('/redux-use-case/blog-posts')} />
         <Button theme={'outlined'} text="select" onClick={() => navigate('/redux-use-case/select')} />
       </div>
       <Outlet />

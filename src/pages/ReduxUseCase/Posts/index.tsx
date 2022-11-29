@@ -1,26 +1,38 @@
-import tw from 'twin.macro';
+import { Route, Routes } from 'react-router-dom';
+import BlogLayout from './components/BlogLayout';
 
-import { Marginer } from '../../../ui/atoms/Marginer';
 import AddPostForm from './features/posts/AddPostForm';
+import EditPostForm from './features/posts/EditPostForm';
 import PostsList from './features/posts/PostsList';
+import SinglePostPage from './features/posts/SinglePostPage';
+import UserPage from './features/users/UserPage';
+import UsersList from './features/users/UsersList';
 
 
 
-const Posts = () => {
+const BlogPosts = () => {
     return (
-        <Container>
-            <Marginer direction="vertical" margin="5em" />
-            <AddPostForm />
-            <PostsList />
-        </Container>
+        <Routes>
+            <Route path="/" element={<BlogLayout />}>
+
+                <Route index element={<PostsList />} />
+
+                <Route path="post">
+                    <Route path=":postId" element={<SinglePostPage />} />
+                    <Route path="add" element={<AddPostForm />} />
+                    <Route path="edit/:postId" element={<EditPostForm />} />
+                </Route>
+
+                <Route path="users">
+                    <Route index element={<UsersList />} />
+                    <Route path=":userId" element={<UserPage />} />
+                </Route>
+            </Route>
+        </Routes>
     )
 }
 
-export default Posts
+export default BlogPosts
 
 
-const Container = tw.div`
-    w-full 
-    h-full
-    flex flex-col items-center
-`;
+
