@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import tw from 'twin.macro';
 
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchPosts, getPostsError, getPostsStatus, IPost, PostState, selectAllPosts } from './postSlice';
 
+import PostAuthor from './PostAuthor';
 import ReactionButton from './ReactionButton';
 import TimeAgo from './TimeAgo';
-import PostAuthor from './PostAuthor';
 
 const PostsList = () => {
     const dispatch = useDispatch()
@@ -15,18 +16,30 @@ const PostsList = () => {
     const postsStatus = useSelector(getPostsStatus) as PostState
     const error = useSelector(getPostsError) as any
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (postsStatus === 'idle') {
             dispatch(fetchPosts())
         }
     }, [postsStatus, dispatch])
 
+
     // use slice() make a copy of original posts
     const orderedPosts = posts.slice().sort((a, b) => b.date.localeCompare(a.date))
 
-    const renderedPosts = orderedPosts.map((post) =>
+    const renderedPosts = orderedPosts.map((post) =>(
         <article key={post.id} className="w-96 h-72 relative">
-            <h3>{post.title.substring(0, 20)}</h3>
+            
+            <Link className="text-4xl font-bold" to={`/redux-use-case/posts/${post.id}`}>{post.title.substring(0, 20)}</Link>
+
+            <button onClick={() =>
+                { return navigate(`/redux-use-case/posts/${post.id}`)}
+                // {
+                //     console.log(`/redux-use-case/posts/${post.id}`)
+                // }
+                  }>xx</button>
+
             <p>{post.body.substring(0, 40)}</p>
 
             <div className="absolute bottom-0">
@@ -36,14 +49,13 @@ const PostsList = () => {
                 </div>
                 <ReactionButton post={post} />
             </div>
-
         </article>
-    )
+    ))
 
 
 
     return (
-        <>
+        <section className="w-full h-full">
             <h2>Posts</h2>
             {
                 postsStatus === 'loading' ?
@@ -54,7 +66,7 @@ const PostsList = () => {
                         :
                         <p>{error}</p>
             }
-        </>
+        </section>
 
     )
 }

@@ -1,20 +1,16 @@
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-
-import { IPost, PostState, selectPostById } from './postSlice';
-import { RootState } from '../../../store';
+import { useSelector } from 'react-redux';
 
 import PostAuthor from "./PostAuthor";
 import TimeAgo from "./TimeAgo";
 
+import { Link, useParams } from 'react-router-dom';
+import { selectPostById } from './postSlice';
+import ReactionButtons from './ReactionButton';
+
 const SinglePostPage = () => {
     const { postId } = useParams()
 
-    const post = useSelector((state:RootState) => {
-        // selectPostById(state, 2)
-        console.log( state.yumePosts.posts?.find((post: { id: number }) => post.id === 2 ))
-    })
+    const post = useSelector((state:any) => selectPostById(state, Number(postId)))
 
     if (!post) {
         return (
@@ -33,7 +29,7 @@ const SinglePostPage = () => {
                 <PostAuthor userId={post.userId} />
                 <TimeAgo timestamp={post.date} />
             </p>
-            <button onClick={post} />
+            <ReactionButtons post={post} />
         </article>
     )
 }

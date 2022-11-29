@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../store";
-import { sub } from "date-fns";
 import axios from "axios";
+import { sub } from "date-fns";
 
 export interface IPost {
     [x: string]: any;

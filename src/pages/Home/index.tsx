@@ -1,7 +1,6 @@
-import React from 'react'
-import tw from "twin.macro";
-import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
 
 const Home = () => {
   const navigate = useNavigate()
@@ -16,7 +15,6 @@ const Home = () => {
         <br />
         <ConditionalButton onClick={()=> navigate('/login-example')} isRed={false} >Login Examples</ConditionalButton>
       </div>
-
     </div>
   )
 }
