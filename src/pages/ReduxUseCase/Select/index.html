@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<style>
+		.warp {
+			width: 500px;
+			height: 500px;
+			margin: 50px auto;
+			padding: 20px;
+			box-sizing: border-box;
+			box-shadow: 1px 1px 30px #c0c0c0;
+		}
+
+		.row {
+			padding: 10px 0;
+		}
+
+		.row select {
+			line-height: 18px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app"></div>
+</body>
+<script type="text/babel">
+	/**
+	 * 
+	 * */
+	const typeList = {
+		"cashierId": 1,
+		"shiftTime": 8,
+		"dailyMax": 100,
+		"rebateTypes": ["money", "time"],
+		"rebateValue": [{
+			"type": "time",
+			"value": [1800, 3600, 7200]
+		},
+		{
+			"type": "money",
+			"value": [50, 100, 200, 500, 1000]
+		}
+		]
+	}
+	function App() {
+		const [type, setType] = window.React.useState("money")
+		const [value, setValue] = window.React.useState("")
+		const [valueList, setValueList] = window.React.useState([])
+
+		const changeValueList = (targetValue) => {
+			setValueList(() => {
+				return typeList.rebateValue.find(item => item.type === targetValue).value
+			})
+		}
+
+		window.React.useEffect(() => {
+			changeValueList(type)
+		})
+
+		return <div className="warp">
+			<div className="row">
+				<span>Rebate Type：</span>
+				<select value={type} style={{ width: 150 }} onChange={e => {
+					console.log('==============Rebate Type======================');
+					console.log(e.target.value);
+					setType(e.target.value)
+					console.log('==============Rebate Type======================');
+					changeValueList(e.target.value)
+				}}>
+					{
+						typeList.rebateTypes.map((item, index) => {
+							return (
+								<option value={item}>{item}</option>
+							)
+						})
+					}
+				</select>
+			</div>
+
+			<div className="row">
+				<span>Rebate Value：</span>
+				<select value={value} style={{ width: 150 }} onChange={e => {
+					console.log('==============Rebate Value======================');
+					setValue(e.target.value)
+					console.log('==============Rebate Value======================');
+				}}>
+					{
+						valueList.map((item, index) => {
+							return (
+								<option value={item}>{item}</option>
+							)
+						})
+					}
+				</select>
+			</div>
+		</div>
+	}
+	let app = document.getElementById('app')
+	window.ReactDOM.render(<App />, app)
+</script>
+
+</html>

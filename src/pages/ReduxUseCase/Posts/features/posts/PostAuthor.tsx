@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { selectAllUsers, UserState } from "../users/usersSlice";
 
 interface Props { 
-    userId: string;
+    userId: number;
 }
 
 const PostAuthor = ({ userId }:Props) => {

@@ -3,7 +3,7 @@ import axios from "axios";
 import { RootState } from "../../../store";
 
 export interface UserState { 
-    id: string;
+    id: number;
     name: string;
 }
 

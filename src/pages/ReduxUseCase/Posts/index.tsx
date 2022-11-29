@@ -9,13 +9,11 @@ import PostsList from './features/posts/PostsList';
 
 const Posts = () => {
     return (
-        <Layout>
             <Container>
                 <Marginer direction="vertical" margin="5em" />
                 <AddPostForm />
                 <PostsList />
             </Container>
-        </Layout>
     )
 }
 

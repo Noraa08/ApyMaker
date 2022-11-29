@@ -1,12 +1,12 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import Button from '../../../ui/atoms/Button';
 
 interface ILayout {
   children: React.ReactNode;
 }
 
-const Layout: React.FC<ILayout> = ({ children }) => {
+const Layout = () => {
   const navigate = useNavigate()
 
   return (
@@ -14,9 +14,9 @@ const Layout: React.FC<ILayout> = ({ children }) => {
       <div className="w-full h-auto flex justify-center pt-3 absolute top-0">
         <Button theme={'outlined'} text="Counter" onClick={() => navigate('/redux-use-case')} />
         <Button theme={'outlined'} text="Blog Posts" onClick={() => navigate('/redux-use-case/posts')} />
-        <Button theme={'outlined'} text="" onClick={() => navigate('/redux-use-case')} />
+        <Button theme={'outlined'} text="select" onClick={() => navigate('/redux-use-case/select')} />
       </div>
-      {children}
+      <Outlet />
     </div>
   )
 }

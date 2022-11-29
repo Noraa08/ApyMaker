@@ -1,39 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { store } from "../src/pages/ReduxUseCase/store";
-import { Provider } from "react-redux";
 import "./index.css";
 
+import Error from "./pages/Error";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import HooksUseCase from "./pages/HooksUseCase";
+import Login from "./pages/Login";
 import ReduxUseCase from "./pages/ReduxUseCase";
-import Posts from "./pages/ReduxUseCase/Posts";
-import { fetchUsers } from "./pages/ReduxUseCase/Posts/features/users/usersSlice";
 
-// get users immediately as it loaded
-store.dispatch(fetchUsers())
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login-example" element={<Login />} />
-          <Route path="/hooks-use-case" element={<HooksUseCase />} />
+          <Route path="/login-example/*" element={<Login />} />
+          <Route path="/hooks-use-case/*" element={<HooksUseCase />} />
+          <Route path="/redux-use-case/*" element={<ReduxUseCase />} />
 
-          <Route path="/redux-use-case" >
-            <Route index element={<ReduxUseCase />} />
-            <Route path="/redux-use-case/posts" element={<Posts />} />
-          </Route>
-
+          <Route path="*" element={<Error />} />
         </Routes>
       </Router>
-    </Provider>
   </React.StrictMode>
 );

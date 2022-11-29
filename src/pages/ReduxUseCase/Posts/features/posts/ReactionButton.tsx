@@ -3,7 +3,7 @@ import { reactionAdded } from "./postSlice";
 
 interface Props {
     post:{
-        id: string;
+        id: number;
         [x: string]: any;
     }
 }

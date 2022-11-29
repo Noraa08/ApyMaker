@@ -6,10 +6,10 @@ import axios from "axios";
 
 export interface IPost {
     [x: string]: any;
-    id: string;
+    id: number;
     title: string;
     content: string;
-    userId: string;
+    userId: number;
     date: string;
     reactions: {
       thumbsUp: number;
@@ -54,10 +54,10 @@ const postsSlice = createSlice({
       reducer(state, action: PayloadAction<IPost>) {
         state.posts?.push(action.payload);
       },
-      prepare(title, content, userId) {
+      prepare(title:string, content:string, userId:number) {
         return {
           payload: {
-            id: nanoid(),
+            id: Number(nanoid()),
             date: new Date().toISOString(),
             title,
             content,
@@ -75,10 +75,10 @@ const postsSlice = createSlice({
     },
     reactionAdded(
       state,
-      action: PayloadAction<{ postId: string; reaction: string }>
+      action: PayloadAction<{ postId: number; reaction: string }>
     ) {
       let { postId, reaction } = action.payload;
-      const existingPost = state.posts?.find((p) => p.id === postId);
+      const existingPost = state.posts?.find((p) => p.id === Number(postId));
       if (existingPost) {
         existingPost.reactions[reaction]++; // // must declare a index signature
       }
@@ -89,7 +89,7 @@ const postsSlice = createSlice({
         .addCase(fetchPosts.pending, (state:any, action) => {
             state.status = 'loading'
         })
-        .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<any[string]>) => {
+        .addCase(fetchPosts.fulfilled, (state, action: PayloadAction<any>) => {
             state.status = 'succeeded'
             // Adding date and reactions because this fake api doesn't have those properties
             let min = 1;
@@ -103,7 +103,7 @@ const postsSlice = createSlice({
                     coffee: 0
                 }
                 return post;
-            });
+            }) as IPost[]
 
             state.posts = loadedPosts
             // Add any fetched posts to the array
@@ -146,5 +146,9 @@ const postsSlice = createSlice({
 export const selectAllPosts = (state: RootState) => state.yumePosts.posts
 export const getPostsStatus = (state: RootState) => state.yumePosts.status
 export const getPostsError = (state: RootState) => state.yumePosts.error
+export const selectPostById = (state: RootState, postId: number) => state.yumePosts.posts?.find(post => post.id === postId)
+
+
+
 export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
