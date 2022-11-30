@@ -19,7 +19,7 @@ export default Header
 
 const NavContainer = tw.div`
     w-full 
-    h-full
+    h-auto
     flex flex-col items-end
     mt-20
 `;

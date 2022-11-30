@@ -73,3 +73,26 @@ export function App() {
     )
 }
 ```
+
+
+### TypeScript
+
+* useRef hook
+
+  ```
+  import * as React from 'react';
+
+  const App = () => {
+    const ref = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+      if (ref.current) {
+        ref.current.focus();
+      }
+    }, []);
+
+    return <input ref={ref} />;
+  };
+
+  export default App;
+  ```

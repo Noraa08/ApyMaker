@@ -1,21 +1,15 @@
 import { Provider } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 
-import { fetchUsers } from './Posts/features/users/usersSlice'
 import { fetchPosts } from './Posts/features/posts/postSlice'
+import { fetchUsers } from './Posts/features/users/usersSlice'
 import { store } from './store'
 
+import Error from '../Error'
 import Layout from './components/Layout'
 import Counter from './Counter'
-import PostsList from './Posts/features/posts/PostsList'
-import SinglePostPage from './Posts/features/posts/SinglePostPage'
-import Select from './Select'
-import Error from '../Error'
-import EditPostForm from './Posts/features/posts/EditPostForm'
-import AddPostForm from './Posts/features/posts/AddPostForm'
-import UserPage from './Posts/features/users/UserPage'
-import UsersList from './Posts/features/users/UsersList'
 import BlogPosts from './Posts'
+import Select from './Select'
 
 
 // get users and posts immediately as it loaded
