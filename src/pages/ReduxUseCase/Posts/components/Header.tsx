@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
 import tw from "twin.macro"
 
 const Header = () => {
-    // const dispatch = useDispatch()
-    // const count = useSelector(getCount)
-
     return (
         <NavContainer>
             <nav>

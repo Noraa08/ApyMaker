@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import BlogLayout from './components/BlogLayout';
 
 import AddPostForm from './features/posts/AddPostForm';
@@ -27,6 +27,10 @@ const BlogPosts = () => {
                     <Route index element={<UsersList />} />
                     <Route path=":userId" element={<UserPage />} />
                 </Route>
+
+                {/* Catch all - replace with 404 component if you want */}
+                <Route path="*" element={<Navigate to="/redux-use-case" replace />} />
+
             </Route>
         </Routes>
     )
