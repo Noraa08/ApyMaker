@@ -1,21 +1,36 @@
-import React from 'react'
-import { useNavigate, Outlet, Link } from 'react-router-dom';
-import Button from '../../../ui/atoms/Button';
+import { Link, Outlet } from 'react-router-dom';
+import tw from 'twin.macro';
+
 
 const Layout = () => {
-  const navigate = useNavigate()
 
   return (
-    <div className="flex flex-col w-full h-screen justify-center relative">
-      <div className="w-full h-auto flex justify-center pt-3 absolute top-0">
+    <Container>
+      <Nav>
         <Link className="mx-10 text-red-400" to="/">Go Back</Link>
-        <Button theme={'outlined'} text="User Registration Form " onClick={() => navigate('/login-example')} />
-        <Button theme={'outlined'} text="Login Form" onClick={() => navigate('/login-example/login-form')} />
-        {/* <Button theme={'outlined'} text="select" onClick={() => navigate('/')} /> */}
-      </div>
+        <Link to='/login-example/'>Website HomePage</Link>
+        <Link to='/login-example/sign-up'>Sign Up</Link>
+        <Link to='/login-example/sign-in'>Sign In</Link>
+        <Link to='/login-example/admin'>Admin </Link>
+        <Link to='/login-example/client'>Client</Link>
+      </Nav>
       <Outlet />
-    </div>
+    </Container>
   )
 }
 
 export default Layout
+
+const Container = tw.div`
+  w-full h-full 
+  flex flex-col 
+  items-center justify-center 
+`
+
+const Nav = tw.div`
+  w-full 
+  flex gap-5
+  justify-center 
+  py-3 
+`
+

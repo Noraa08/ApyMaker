@@ -7,7 +7,7 @@ type AuthContextProps = {
 export interface Auth {
     user: string,
     pwd: string
-    roles: string
+    roles: number[] // user, client, admin
     accessToken:string
 }
 

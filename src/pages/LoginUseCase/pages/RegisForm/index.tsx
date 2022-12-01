@@ -1,16 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { faCheck, faInfoCircle, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { SubmitFormEvent } from "../../../types";
+import { SubmitFormEvent } from "../../../../types";
 import axios from "axios";
-import "./index.css";
-
+import '../../index.css'
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;  // user regex - start with a lower or uppercase letter, followed by anywhere from 3-23 characters (lower or uppercase letter, or digits, or - _ )
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/; // password regex - must have at least one lowercase, and one uppercase, and one digit, and one special character (8 - 24 characters)
 const REGISTER_URL = 'http://localhost:3500/register';
 
-const UserRegisForm = () => {
+const RegisForm = () => {
     // to set focus on the user input when component loads
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLParagraphElement>(null);
@@ -68,7 +67,6 @@ const UserRegisForm = () => {
 
     const handleSubmit = async (e: SubmitFormEvent) => {
         e.preventDefault()
-        console.log("user + password:", user, pwd)
         // if button enabled with JS hack
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
@@ -117,7 +115,7 @@ const UserRegisForm = () => {
                     </p>
                 </section>
             ) : (
-                <section>
+                <section className="formlayout">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Register</h1>
                     <form onSubmit={handleSubmit}>
@@ -197,7 +195,7 @@ const UserRegisForm = () => {
                             Must match the first password input field.
                         </p>
 
-                        <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                        <button className="btn" disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
                     </form>
 
                     <p>
@@ -213,4 +211,4 @@ const UserRegisForm = () => {
     )
 }
 
-export default UserRegisForm
+export default RegisForm

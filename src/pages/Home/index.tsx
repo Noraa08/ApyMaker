@@ -9,11 +9,11 @@ const Home = () => {
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
 
       <div className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-        <StyledButton onClick={()=> navigate('/hooks-use-case')}>Hook Use Cases </StyledButton>
+        {/* <StyledButton onClick={()=> navigate('/hooks-use-case')}>Hook Use Cases </StyledButton>
+        <br /> */}
+        <TailwindButton onClick={() => navigate('/redux-use-case')}>Redux Use Cases </TailwindButton>
         <br />
-        <TailwindButton onClick={()=> navigate('/redux-use-case')}>Redux Use Cases </TailwindButton>
-        <br />
-        <ConditionalButton onClick={()=> navigate('/login-example')} isRed={false} >Login Examples</ConditionalButton>
+        <ConditionalButton onClick={() => navigate('/login-example')} isRed={false} >Login & Regist - useContext</ConditionalButton>
       </div>
     </div>
   )
