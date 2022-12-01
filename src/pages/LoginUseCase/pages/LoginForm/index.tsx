@@ -1,13 +1,18 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { SubmitFormEvent } from '../../../../types';
-import AuthContext from '../../context/AuthProvider';
-import axios from 'axios'
 import useAuth from '../../hooks/useAuth';
+import axios from 'axios';
 
 const LOGIN_URL = 'http://localhost:3500/auth';
 
 const LoginForm = () => {
     const { setAuth } = useAuth()!
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     // to set focus on the user input when component loads
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLParagraphElement>(null);
@@ -45,7 +50,8 @@ const LoginForm = () => {
             setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
-            setSuccess(true);
+
+            navigate(from, { replace: true });
         } catch (err: any) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -61,17 +67,7 @@ const LoginForm = () => {
     }
 
     return (
-        <>
-            {success ? (
-                <section>
-                    <h1>You are logged in!</h1>
-                    <br />
-                    <p>
-                        <a href="#">Go to Home</a>
-                    </p>
-                </section>
-            ) : (
-                <section className="formlayout">
+       <section className="formlayout">
                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                     <h1>Sign In</h1>
                     <form onSubmit={handleSubmit}>
@@ -106,8 +102,6 @@ const LoginForm = () => {
                         </span>
                     </p>
                 </section>
-            )}
-        </>
     )
 }
 
