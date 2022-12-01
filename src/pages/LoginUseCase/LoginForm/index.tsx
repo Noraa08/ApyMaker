@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { SubmitFormEvent } from '../../../types';
-import axios from '../api/axios';
 import AuthContext from '../context/AuthProvider';
+import axios from 'axios'
 
-const LOGIN_URL = '/auth';
+const LOGIN_URL = 'http://localhost:3500/auth';
 
 const LoginForm = () => {
-    // const { setAuth } = useContext(AuthContext);
+    const { setAuth } = useContext(AuthContext)!
      // to set focus on the user input when component loads
      const userRef = useRef<HTMLInputElement>(null);
      const errRef = useRef<HTMLParagraphElement>(null);
@@ -41,7 +41,7 @@ const LoginForm = () => {
             //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            // setAuth({ user, pwd, roles, accessToken });
+            setAuth({ user, pwd, roles, accessToken });
             setUser('');
             setPwd('');
             setSuccess(true);
