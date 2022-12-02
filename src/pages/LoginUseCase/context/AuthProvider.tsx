@@ -13,7 +13,7 @@ export interface Auth {
 
 export interface AuthState {
     auth?: Auth,
-    setAuth:(auth: Auth) => void
+    setAuth:(auth: Auth) => any
 }
 
 export const AuthContext = createContext<AuthState | null>(null);
